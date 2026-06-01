@@ -1,5 +1,7 @@
 # Feedback → Roadmap
 
+[![CI](https://github.com/aalamkh/sift/actions/workflows/ci.yml/badge.svg)](https://github.com/aalamkh/sift/actions/workflows/ci.yml)
+
 **Turn a pile of raw product feedback into a RICE-prioritized Now / Next / Later roadmap — in one click.**
 
 Paste support tickets, app-store reviews, and sales notes; the app clusters them into themes, proposes RICE scores, and lays out a prioritized roadmap you can tune by hand and export as Markdown.
