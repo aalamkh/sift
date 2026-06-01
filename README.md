@@ -130,6 +130,10 @@ npm test
 
 [`src/lib/rice.test.ts`](src/lib/rice.test.ts) covers `computeRiceScore`, `sortThemesByScore`, and `bucketThemes`, including edge cases (effort `0`, empty arrays, single themes, and inclusive bucket boundaries).
 
+## License
+
+[MIT](LICENSE) © Muhammad Alamgir Khan
+
 ---
 
 _A portfolio project. Built with React, Tailwind, and the Anthropic API._
