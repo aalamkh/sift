@@ -6,6 +6,8 @@
 
 Paste support tickets, app-store reviews, and sales notes; the app clusters them into themes, proposes RICE scores, and lays out a prioritized roadmap you can tune by hand and export as Markdown.
 
+> **No API key? No problem.** Click **“See a sample result”** for an instant, fully-interactive **Demo Mode** — a pre-computed analysis you can edit, re-prioritize, and export, with no key and no network call. Bring your own key only when you want to analyze your *own* feedback live.
+
 ![Demo](docs/demo.gif)
 
 > _Demo GIF placeholder — drop a screen recording at `docs/demo.gif`._
@@ -30,6 +32,7 @@ This is a portfolio project built to show **product thinking**, not just front-e
 - 📝 **Executive rationale** — generate a short, decisive summary of what to tackle now and what's deferred.
 - 📋 **Markdown export** — copy the full roadmap (themes, buckets, scores, rationale) to your clipboard.
 - 🎛️ **Sample datasets** — three built-in feedback sets (B2B SaaS, mobile app, e-commerce) to try it instantly.
+- ▶️ **Demo Mode** — a pre-computed sample analysis (no API key, no network call) so anyone can explore the full experience; the result is fully interactive and clearly labeled as a demo.
 - 🔒 **Bring your own key** — your Anthropic API key stays in memory in your browser; it is never stored or proxied.
 
 ## Tech stack

@@ -7,6 +7,7 @@ import { RationaleBox } from './components/RationaleBox';
 import { ExportButton } from './components/ExportButton';
 import { analyzeFeedback, generateRationale } from './lib/anthropic';
 import { bucketThemes, withRiceScore } from './lib/rice';
+import { demoThemes, demoRationale, demoFeedbackText } from './data/demoResult';
 import type { RiceScore, Theme } from './types';
 
 export default function App() {
@@ -18,6 +19,8 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [rationale, setRationale] = useState('');
   const [rationaleLoading, setRationaleLoading] = useState(false);
+  // True when the on-screen result is the canned demo (no live API call).
+  const [isDemo, setIsDemo] = useState(false);
 
   const hasKey = apiKey.trim().length > 0;
   const hasFeedback = feedbackText.trim().length > 0;
@@ -28,6 +31,7 @@ export default function App() {
   async function handleAnalyze() {
     setError(null);
     setLoading(true);
+    setIsDemo(false);
     try {
       const result = await analyzeFeedback(feedbackText, apiKey);
       setThemes(result);
@@ -37,6 +41,20 @@ export default function App() {
     } finally {
       setLoading(false);
     }
+  }
+
+  // Demo Mode: load a pre-computed sample result — no API key, no network call.
+  // A short delay shows the analyzing state so the flow feels real.
+  function handleLoadDemo() {
+    setError(null);
+    setFeedbackText(demoFeedbackText);
+    setLoading(true);
+    window.setTimeout(() => {
+      setThemes(demoThemes);
+      setRationale(demoRationale);
+      setIsDemo(true);
+      setLoading(false);
+    }, 650);
   }
 
   async function handleGenerateRationale() {
@@ -78,6 +96,7 @@ export default function App() {
                 value={feedbackText}
                 onChange={setFeedbackText}
                 onAnalyze={handleAnalyze}
+                onLoadDemo={handleLoadDemo}
                 loading={loading}
                 disabled={!hasKey || !hasFeedback}
                 needsKey={!hasKey}
@@ -89,10 +108,11 @@ export default function App() {
 
           {loading && <AnalyzingState />}
 
-          {!loading && !hasThemes && <EmptyState />}
+          {!loading && !hasThemes && <EmptyState onLoadDemo={handleLoadDemo} />}
 
           {hasThemes && (
             <div className="space-y-8 animate-fade-in-up">
+              {isDemo && <DemoBanner hasKey={hasKey} />}
               <section>
                 <SectionHeading
                   title="Prioritized roadmap"
@@ -214,7 +234,7 @@ function AnalyzingState() {
   );
 }
 
-function EmptyState() {
+function EmptyState({ onLoadDemo }: { onLoadDemo: () => void }) {
   return (
     <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-white/50 px-6 py-16 text-center">
       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50">
@@ -225,6 +245,33 @@ function EmptyState() {
         Paste your raw feedback above — or load a sample dataset — then hit{' '}
         <span className="font-medium text-brand-700">Analyze feedback</span> to see it clustered,
         scored, and prioritized.
+      </p>
+      <div className="mt-5 flex flex-col items-center gap-2">
+        <button
+          type="button"
+          onClick={onLoadDemo}
+          className="inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition hover:bg-brand-700"
+        >
+          ▶ See a sample result
+        </button>
+        <span className="text-xs text-slate-400">No API key required — instant demo.</span>
+      </div>
+    </div>
+  );
+}
+
+function DemoBanner({ hasKey }: { hasKey: boolean }) {
+  return (
+    <div className="flex items-start gap-3 rounded-2xl border border-brand-200 bg-brand-50 p-4">
+      <span className="mt-0.5 shrink-0 rounded-full bg-brand-600 px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-white">
+        Demo
+      </span>
+      <p className="text-sm text-brand-900/80">
+        This is a pre-computed sample analysis — no API call was made. Everything below is fully
+        interactive: edit any RICE input to re-prioritize, or export the roadmap.{' '}
+        {hasKey
+          ? 'Click “Analyze feedback” above to run it for real on this data.'
+          : 'Add your own Anthropic API key above to analyze your own feedback live.'}
       </p>
     </div>
   );

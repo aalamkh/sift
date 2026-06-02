@@ -4,6 +4,8 @@ interface FeedbackInputProps {
   value: string;
   onChange: (text: string) => void;
   onAnalyze: () => void;
+  /** Load a pre-computed sample result — no API key needed. */
+  onLoadDemo: () => void;
   loading: boolean;
   /** Disabled when there is no API key or no feedback text. */
   disabled: boolean;
@@ -25,6 +27,7 @@ export function FeedbackInput({
   value,
   onChange,
   onAnalyze,
+  onLoadDemo,
   loading,
   disabled,
   needsKey,
@@ -86,11 +89,19 @@ export function FeedbackInput({
         </button>
       </div>
 
-      {needsKey && (
-        <p className="mt-2 text-right text-xs text-slate-400">
-          Add your API key to enable analysis.
-        </p>
-      )}
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+        <button
+          type="button"
+          onClick={onLoadDemo}
+          disabled={loading}
+          className="text-xs font-medium text-brand-700 underline-offset-2 transition hover:underline disabled:opacity-50"
+        >
+          ▶ See a sample result (no key needed)
+        </button>
+        {needsKey && (
+          <span className="text-xs text-slate-400">Add your API key to analyze live.</span>
+        )}
+      </div>
     </div>
   );
 }
