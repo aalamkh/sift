@@ -11,9 +11,9 @@ Paste support tickets, app-store reviews, and sales notes; the app clusters them
 
 > **No API key? No problem.** Click **“See a sample result”** for an instant, fully-interactive **Demo Mode** — a pre-computed analysis you can edit, re-prioritize, and export, with no key and no network call. Bring your own key only when you want to analyze your *own* feedback live.
 
-![Demo](docs/demo.gif)
+![Feedback → Roadmap — clustered themes, RICE scores, and a Now/Next/Later roadmap](docs/shots/03-roadmap.png)
 
-> _Demo GIF placeholder — drop a screen recording at `docs/demo.gif`._
+> _Tip: a short screen recording (`docs/demo.gif`) of the roadmap re-sorting as you edit a RICE score makes an even stronger header — swap it in when ready._
 
 ---
 
