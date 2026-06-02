@@ -1,8 +1,11 @@
 # Feedback → Roadmap
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Open_app-7c3aed?style=flat&logo=vercel&logoColor=white)](https://sift-muhammad-alamgir-khans-projects.vercel.app)
 [![CI](https://github.com/aalamkh/sift/actions/workflows/ci.yml/badge.svg)](https://github.com/aalamkh/sift/actions/workflows/ci.yml)
 
 **Turn a pile of raw product feedback into a RICE-prioritized Now / Next / Later roadmap — in one click.**
+
+**🔗 Live demo:** **https://sift-muhammad-alamgir-khans-projects.vercel.app** — no sign-up, no API key; click _“See a sample result.”_
 
 Paste support tickets, app-store reviews, and sales notes; the app clusters them into themes, proposes RICE scores, and lays out a prioritized roadmap you can tune by hand and export as Markdown.
 
